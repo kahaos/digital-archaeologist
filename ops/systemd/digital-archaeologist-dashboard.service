@@ -1,0 +1,20 @@
+[Unit]
+Description=Digital Archaeologist Streamlit dashboard
+After=network.target
+
+[Service]
+Type=simple
+User=digital-archaeologist
+Group=digital-archaeologist
+WorkingDirectory=/opt/digital-archaeologist
+EnvironmentFile=/etc/digital-archaeologist.env
+ExecStart=/opt/digital-archaeologist/.venv/bin/streamlit run src/digital_archaeologist/dashboard/app.py --server.address 127.0.0.1 --server.port 8501
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/digital-archaeologist/data
+
+[Install]
+WantedBy=multi-user.target

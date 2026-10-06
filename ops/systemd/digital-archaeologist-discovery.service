@@ -1,0 +1,20 @@
+[Unit]
+Description=Digital Archaeologist read-only discovery
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=digital-archaeologist
+Group=digital-archaeologist
+WorkingDirectory=/opt/digital-archaeologist
+EnvironmentFile=/etc/digital-archaeologist.env
+ExecStart=/opt/digital-archaeologist/.venv/bin/python -m digital_archaeologist.jobs.run_discovery
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/digital-archaeologist/data
+
+[Install]
+WantedBy=multi-user.target
